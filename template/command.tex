@@ -1,0 +1,98 @@
+% Set of commands used by cv.tex
+
+\usepackage[dvipsnames,usenames]{color}
+\usepackage{simplemargins}
+\usepackage{graphicx}
+\setleftmargin{2.0cm}
+\setrightmargin{2.0cm}
+\settopmargin{2.5cm}
+\setbottommargin{2.5cm}
+%\renewcommand\familydefault{\sfdefault}
+
+
+% starting commands
+\newfont{\myfonta}{cmcsc10 at 9pt}
+\newfont{\myfontb}{cmr10 at 10pt}
+\newfont{\myfontc}{cmr10 at 15pt}
+\newfont{\myfontd}{cmr10 at 13pt}
+\newfont{\myfonte}{cmbx10 at 9pt}
+\newfont{\myfontf}{cmti10}
+\newfont{\myfontg}{cmcsc10 at 11pt}
+\newfont{\myfonth}{cmr10 at 9pt}
+\newfont{\mathfontnine}{cmmi10 at 9pt}
+\newfont{\mathfontten}{cmmi10}
+
+\newcommand{\largeskip}[0]{\vspace{2.5mm}\\}
+\newcommand{\shortskip}[0]{\vspace{-0.8mm}\\}
+
+% small caps
+\newcommand{\smcp}[1]{{\sc{\myfonta{#1}}}}
+\renewcommand{\textsc}[1]{\smcp{#1}}
+
+\renewcommand{\textbf}[1]{{\bf \myfonte{#1}}}
+\renewcommand{\textit}[1]{{\myfontf{#1}}}
+
+\newcommand{\smr}[1]{{\myfonth{#1}}}
+
+\newcommand{\header}[3]{
+\noindent
+\hspace{0cm} 
+\begin{tabular}{p{11cm}p{6cm}}
+{\raggedright {\headline {#1}}
+\\\vspace*{2mm}
+\headline{#2}} 
+& 
+\raggedleft{#3}
+\end{tabular}}
+
+
+\newcommand{\blocktitle}[1]{
+\noindent
+\parbox{\textwidth}{
+	\vspace{2mm}
+	\noindent
+	\textcolor{MidnightBlue}{
+{\myfontd {#1}
+	\vspace*{1mm}
+	\hrule}
+	\vspace*{3mm}
+	\noindent
+} } }
+
+\newcommand{\blocktitletwo}[1]{
+\noindent
+\parbox{\textwidth}{
+	\vspace{2mm}
+	\noindent
+	\textcolor{OliveGreen}{
+{\myfontg {#1}
+	\vspace*{1mm}
+	\hrule}
+	\vspace*{3mm}
+	\noindent
+} } }
+
+\newcommand{\headline}[1]{{\myfontc{#1}}}
+\newcommand{\setmainfont}[0]{\myfontb}
+
+%%%%%%
+
+\newenvironment{resumeblock}[1]{\blocktitle{#1}\begin{tabular}{p{3.6cm}p{14cm}}}{\end{tabular}}
+\newenvironment{resumeblocktwo}[1]{\blocktitletwo{#1}\begin{tabular}{p{3.6cm}p{14cm}}}{\end{tabular}}
+
+\newcommand{\resumeitem}[2]{\noindent\raggedright{\textsc{#1}} & #2}
+
+%%%%%%
+
+\newcommand{\interest}[2]{
+\includegraphics[height=12pt]{#1}
+~\raisebox{1mm}{#2}}
+
+%%%%%%
+
+\newenvironment{interestsblock}[1]
+{\blocktitle{#1}\begin{tabular}{p{10cm}p{10cm}}}
+{\end{tabular}}
+
+%\setlength{\parindent}{0mm}
+\pagestyle{empty}

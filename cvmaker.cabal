@@ -1,4 +1,4 @@
-Name:		cv-maker
+Name:		cvmaker
 Version:	0.0.0.0
 Synopsis:	Curriculum Vitae Maker
 Description: 	Curriculum Vitae Maker 
@@ -8,14 +8,20 @@ Author:		Ian-Woo Kim
 Maintainer: 	Ian-Woo Kim <ianwookim@gmail.com>
 Build-Type: 	Simple
 Cabal-Version:  >= 1.2
+data-files:     template/*.tex.st
 
-
-Executable cv-maker 
-  Main-is: cv-maker.hs
+Executable cvmaker 
+  Main-is: cvmaker.hs
   hs-source-dirs: src
   ghc-options: 	-Wall -O2 -threaded -funbox-strict-fields -fno-warn-unused-do-bind
   ghc-prof-options: -caf-all -auto-all
   Build-Depends: base>4, filepath>1, HStringTemplate, HStringTemplateHelpersIW
 
-
+Library
+  hs-source-dirs: src 
+  ghc-options: 	-Wall -O2 -threaded -funbox-strict-fields -fno-warn-unused-do-bind
+  ghc-prof-options: -caf-all -auto-all
+  Other-Modules: 
+                 Paths_cvmaker
+ 
 		 

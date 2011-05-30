@@ -6,7 +6,9 @@ import Text.StringTemplate.Helpers
 import System.FilePath
 import System.IO
 
+import Paths_cvmaker
+
 main = do 
-  putStrLn " cv-maker version 0.0.0.0 " 
+  putStrLn " cvmaker version 0.0.0.0 " 
 
 
