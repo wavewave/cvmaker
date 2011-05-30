@@ -14,6 +14,12 @@ import Text.Parsec
 
 import Paths_cvmaker
 
+import Type
+import Parse
+import ContentBuild
+
+
+
 contdir = "/Users/wavewave/mac/prog/cvmaker/content"
 workdir = "/Users/wavewave/mac/prog/cvmaker/working"
 
@@ -27,20 +33,8 @@ copyFiles = do
   putStrLn $ " copying command.tex to " ++ workdir 
   copyFile (templdir </> "command.tex") (workdir </> "command.tex")
 
-data Content = Content { 
-  header :: String, 
-  personalProfile :: String,
-  professionalActivity :: String, 
-  publications :: String, 
-  proceedings :: String
-}
 
-data HeaderContent = Header { 
-  headerName  :: String,
-  headerField :: String, 
-  headerEmail :: String,
-  headerTel   :: String
-} deriving Show
+
 
 testcontent = Content { 
   header  = "",  
@@ -50,18 +44,6 @@ testcontent = Content {
   proceedings = ""
 } 
 
-makeCV :: Content -> IO String 
-makeCV c = do 
-  templdir <- return . (</> "template" ) =<< getDataDir 
-  templates <- directoryGroup templdir 
-  let str = renderTemplateGroup templates 
-                      [ ("Header"              , header               c) 
-                      , ("PersonalProfile"     , personalProfile      c)
-                      , ("ProfessionalActivity", professionalActivity c)
-                      , ("Publications"        , publications         c)
-		      , ("Proceedings"         , proceedings          c) ]
-                      "cv.tex"
-  return str
 
 main = do 
   copyFiles
@@ -82,87 +64,3 @@ main = do
 tempparse = do 
   headerParse
   experienceParse
-
-
-makeHeader :: STGroup String -> HeaderContent -> String 
-makeHeader templates hc = 
-  renderTemplateGroup 
-    templates
-    [ ("name" , headerName  hc) 
-    , ("field", headerField hc)
-    , ("email", headerEmail hc) 
-    , ("tel"  , headerTel   hc) ]
-    "header.tex"
-
-{-
-makePersonalProfile :: STGroup String -> ProfileContent -> String 
-makePersonalProfile templates pc = 
-  renderTemplateGroup 
-    templates 
-    [ ("educationlist", educationStr (educationList pc)) ] 
-    "education.tex"
--}
-
-
-
-oneFieldInput :: String -> ParsecT String () Identity String 
-oneFieldInput fieldname = do 
-  spaces
-  string fieldname 
-  spaces
-  char ':'
-  spaces
-  str <- many1 (noneOf "\n")
-  char '\n'
-  return str 
-
-multiLineInput :: String -> [Char] -> ParsecT String () Identity String
-multiLineInput fieldname delimiters = do
-  spaces
-  string fieldname
-  spaces 
-  char ':' 
-  spaces 
-  str <- many1 (noneOf delimiters) 
---  try (oneOf delimiters)
-  return str 
-   
-
-oneGroupFieldInput :: String 
-		   -> ParsecT String () Identity a 
-		   -> ParsecT String () Identity a
-oneGroupFieldInput groupname parser = do 
-  spaces
-  string groupname
-  spaces 
-  char '{'
-  spaces 
-  r <- parser
-  spaces 
-  char '}'
---  spaces
---  char '\n'
-  return r
-
-
-headerParse :: ParsecT String () Identity HeaderContent
-headerParse = 
-  Header <$> oneFieldInput "name" 
-  	 <*> oneFieldInput "field" 
-         <*> oneFieldInput "email"
-         <*> oneFieldInput "tel"
-
-
-data ExperienceContent = Experience { 
-  experiencePeriod  :: String, 
-  experienceContent :: String
-} deriving Show
-
-
-experienceParse1 :: ParsecT String () Identity ExperienceContent 
-experienceParse1 = 
-  Experience <$> oneFieldInput "period"
-             <*> multiLineInput "content" "}"
-
-experienceParse :: ParsecT String () Identity ExperienceContent 
-experienceParse = oneGroupFieldInput "education" experienceParse1 
