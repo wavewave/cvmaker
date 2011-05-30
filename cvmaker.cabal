@@ -17,7 +17,7 @@ Executable cvmaker
   hs-source-dirs: src
   ghc-options: 	-Wall -O2 -threaded -funbox-strict-fields -fno-warn-unused-do-bind
   ghc-prof-options: -caf-all -auto-all
-  Build-Depends: base>4, directory, filepath>1, 
+  Build-Depends: base>4, mtl>2, directory, filepath>1, 
                  HStringTemplate, HStringTemplateHelpersIW, parsec
 
 Library

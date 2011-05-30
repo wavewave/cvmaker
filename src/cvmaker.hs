@@ -1,5 +1,8 @@
 module Main where
 
+import Control.Monad.Identity
+import Control.Applicative
+
 import Text.StringTemplate
 import Text.StringTemplate.Helpers
 
@@ -32,6 +35,13 @@ data Content = Content {
   proceedings :: String
 }
 
+data HeaderContent = Header { 
+  headerName  :: String,
+  headerField :: String, 
+  headerEmail :: String,
+  headerTel   :: String
+} deriving Show
+
 testcontent = Content { 
   header  = "",  
   personalProfile = "", 
@@ -55,22 +65,44 @@ makeCV c = do
 
 main = do 
   copyFiles
+  templdir <- return . (</> "template" ) =<< getDataDir 
+  templates <- directoryGroup templdir 
   contentstr <- readFile (contdir </> "content.txt") 
   putStrLn "reading content.txt"
   let r = parse headerParse "" contentstr 
   case r of 
-    Right str -> putStrLn str 
+    Right h -> do 
+      putStrLn (makeHeader templates h) 
     Left  err -> putStrLn (show err)
 
 --  str <- makeCV testcontent 
 --  putStrLn str
 
 
+makeHeader :: STGroup String -> HeaderContent -> String 
+makeHeader templates hc = 
+  renderTemplateGroup 
+    templates
+    [ ("name" , headerName  hc) 
+    , ("field", headerField hc)
+    , ("email", headerEmail hc) 
+    , ("tel"  , headerTel   hc) ]
+    "header.tex"
 
-headerParse :: Parsec String () String 
-headerParse = do 
-  string "name:" 
-  spaces 
-  name <- many1 (noneOf "\n")
+
+oneFieldInput :: String -> ParsecT String () Identity String 
+oneFieldInput fieldname = do 
+  string (fieldname ++ ":")
+  spaces
+  str <- many1 (noneOf "\n")
   char '\n'
-  return name
+  return str 
+
+headerParse :: ParsecT String () Identity HeaderContent
+headerParse = do
+  Header <$> oneFieldInput "name" 
+  	 <*> oneFieldInput "field" 
+         <*> oneFieldInput "email"
+         <*> oneFieldInput "tel"
+
+ 

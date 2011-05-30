@@ -1,1 +1,5 @@
 name: Ian-Woo Kim
+field: Theoretical High Energy Physics
+email: iankim@umich.edu
+tel:   (+1) 734 763 5986
+
