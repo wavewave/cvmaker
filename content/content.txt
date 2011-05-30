@@ -3,3 +3,18 @@ field: Theoretical High Energy Physics
 email: iankim@umich.edu
 tel:   (+1) 734 763 5986
 
+education { 
+  period:  Mar 2001 -- Feb 2006 
+  content: Ph.D. in Theoretical Particle Physics \\ 
+           Korea Advanced Institute of Science and Technology (KAIST)
+}
+
+education {
+  period: Mar 1999 -- Feb 2001
+  content: M.S. in Theoretical Particle Physics, KAIST
+}
+
+education { 
+  period: Mar 1995 -- Feb 1999
+  content: B.S. in Physics, KAIST
+}
