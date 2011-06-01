@@ -1,5 +1,5 @@
 Name:		cvmaker
-Version:	0.0.1.0
+Version:	0.0.2.0
 Synopsis:	Curriculum Vitae Maker
 Description: 	Curriculum Vitae Maker 
 License: 	GPL-3
@@ -29,6 +29,7 @@ Library
                  Type
                  Parse
                  ContentBuild
+                 Config
 
   Other-Modules: 
                  Paths_cvmaker

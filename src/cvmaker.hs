@@ -17,16 +17,37 @@ import Paths_cvmaker
 import Type
 import Parse
 import ContentBuild
+import Config
 
-
-
+{-
 contdir = "/Users/wavewave/mac/prog/cvmaker/content"
 workdir = "/Users/wavewave/mac/prog/cvmaker/working"
+-}
 
+getContentDirectory :: IO FilePath
+getContentDirectory = do
+  str <- readFile "~/.cvconfig"  
+  let r = parse parseConfig "" str 
+  case r of
+    Right (PathConfig contdir _) -> return contdir 
+    Left  err -> error (show err)
+
+
+getWorkDirectory :: IO FilePath
+getWorkDirectory = do
+  str <- readFile "~/.cvconfig"  
+  let r = parse parseConfig "" str 
+  case r of
+    Right (PathConfig _ workdir) -> return workdir 
+    Left  err -> error (show err) 
+    
 
 copyFiles :: IO () 
 copyFiles = do 
   datadir <- getDataDir
+  contdir <- getContentDirectory 
+  workdir <- getWorkDirectory
+
   let templdir = datadir </> "template" 
   putStrLn " cvmaker version 0.0.0.0 " 
   putStrLn $ " templdir = " ++ templdir
@@ -45,6 +66,8 @@ testcontent = Content {
 
 
 main = do 
+  contdir <- getContentDirectory 
+  workdir <- getWorkDirectory
   copyFiles
   templdir <- return . (</> "template" ) =<< getDataDir 
   templates <- directoryGroup templdir 
