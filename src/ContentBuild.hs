@@ -31,10 +31,14 @@ makeEducations :: STGroup String -> [EducationContent] -> String
 makeEducations templates = concatMap (makeEducation templates)
 
 makePersonalProfile :: STGroup String -> Profile -> String 
-makePersonalProfile templates pc = 
+makePersonalProfile templates p = 
   renderTemplateGroup 
     templates 
-    [ ("experience", makeEducations templates (profileEducations pc)) ] 
+    [ ("birthdate"  , profileBirthDate p )
+    , ("birthplace" , profileBirthPlace p )
+    , ("citizenship", profileCitizenship p ) 
+    , ("address"    , profileAddress p )  
+    , ("education"  , makeEducations templates (profileEducations p)) ] 
     "profile.tex"
 
 

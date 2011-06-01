@@ -1,5 +1,5 @@
 Name:		cvmaker
-Version:	0.0.0.0
+Version:	0.0.1.0
 Synopsis:	Curriculum Vitae Maker
 Description: 	Curriculum Vitae Maker 
 License: 	GPL-3
@@ -11,6 +11,7 @@ Cabal-Version:  >= 1.2
 data-files:     
                 template/*.tex
                 template/*.tex.st
+                template/*.sty
 
 Executable cvmaker 
   Main-is: cvmaker.hs

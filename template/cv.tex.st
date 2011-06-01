@@ -1,6 +1,6 @@
 \\documentclass[letter,12pt]{article}
 
-\\include{command.tex}
+\\include{command}
 
 \\begin{document}
 

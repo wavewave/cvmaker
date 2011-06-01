@@ -32,8 +32,7 @@ copyFiles = do
   putStrLn $ " templdir = " ++ templdir
   putStrLn $ " copying command.tex to " ++ workdir 
   copyFile (templdir </> "command.tex") (workdir </> "command.tex")
-
-
+  copyFile (templdir </> "simplemargins.sty") (workdir </> "simplemargins.sty")
 
 
 testcontent = Content { 
@@ -55,8 +54,19 @@ main = do
      r = parse mainparse "" contentstr
   case r of 
     Right (h,p) -> do 
-      putStrLn $ makeHeader templates h 
-                 ++ makePersonalProfile templates p 
+      let c = Content { header = makeHeader templates h
+                      , personalProfile = makePersonalProfile templates p 
+                      , professionalActivity = "" 
+                      , publications = ""
+                      , proceedings = ""
+                      }
+      makeCV c >>= putStrLn 
+      
+      
+
+
+--      putStrLn $ makeHeader templates h 
+---                 ++ makePersonalProfile templates p 
 
 --(show h) -- (makeHeader templates h) 
     Left  err -> putStrLn (show err)
@@ -65,7 +75,6 @@ main = do
 --  putStrLn str
 
 mainparse = do 
-  h  <- headerParse
-  es <- many1 (try educationParse)
-
-  return (h,Profile es)
+  h <- headerParse
+  p <- profileParse
+  return (h,p)

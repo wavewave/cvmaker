@@ -26,6 +26,7 @@ multiLineInput fieldname delimiters = do
   char ':' 
   spaces 
   str <- many1 (noneOf delimiters) 
+--  oneOf delimiters 
 --  try (oneOf delimiters)
   return str 
    
@@ -53,6 +54,14 @@ headerParse =
          <*> oneFieldInput "email"
          <*> oneFieldInput "tel"
 
+
+profileParse :: ParsecT String () Identity Profile
+profileParse = 
+   Profile <$> oneFieldInput "birthdate"
+           <*> oneFieldInput "birthplace"
+           <*> oneFieldInput "citizenship"
+           <*> (multiLineInput "address" "|" <* oneOf "|")
+           <*> many1 (try educationParse)
 
 educationParse1 :: ParsecT String () Identity EducationContent 
 educationParse1 = 

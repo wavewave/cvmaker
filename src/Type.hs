@@ -22,5 +22,10 @@ data EducationContent = Education {
 } deriving Show
 
 data Profile = Profile {
+  profileBirthDate :: String, 
+  profileBirthPlace :: String, 
+  profileCitizenship :: String, 
+  profileAddress :: String, 
   profileEducations :: [EducationContent]
 }
+
