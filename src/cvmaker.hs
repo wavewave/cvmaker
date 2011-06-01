@@ -48,19 +48,24 @@ testcontent = Content {
 main = do 
   copyFiles
   templdir <- return . (</> "template" ) =<< getDataDir 
---  templates <- directoryGroup templdir 
+  templates <- directoryGroup templdir 
   contentstr <- readFile (contdir </> "content.txt") 
   putStrLn "reading content.txt"
   let -- r = parse headerParse "" contentstr 
-     r = parse tempparse "" contentstr
+     r = parse mainparse "" contentstr
   case r of 
-    Right h -> do 
-      putStrLn (show h) -- (makeHeader templates h) 
+    Right (h,p) -> do 
+      putStrLn $ makeHeader templates h 
+                 ++ makePersonalProfile templates p 
+
+--(show h) -- (makeHeader templates h) 
     Left  err -> putStrLn (show err)
 
 --  str <- makeCV testcontent 
 --  putStrLn str
 
-tempparse = do 
-  headerParse
-  experienceParse
+mainparse = do 
+  h  <- headerParse
+  es <- many1 (try educationParse)
+
+  return (h,Profile es)

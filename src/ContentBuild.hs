@@ -19,14 +19,25 @@ makeHeader templates hc =
     , ("tel"  , headerTel   hc) ]
     "header.tex"
 
-{-
-makePersonalProfile :: STGroup String -> ProfileContent -> String 
+makeEducation :: STGroup String -> EducationContent -> String
+makeEducation templates ec = 
+  renderTemplateGroup
+    templates
+    [ ("period" , educationPeriod  ec) 
+    , ("content", educationContent ec) ] 
+    "education.tex"
+
+makeEducations :: STGroup String -> [EducationContent] -> String
+makeEducations templates = concatMap (makeEducation templates)
+
+makePersonalProfile :: STGroup String -> Profile -> String 
 makePersonalProfile templates pc = 
   renderTemplateGroup 
     templates 
-    [ ("educationlist", educationStr (educationList pc)) ] 
-    "education.tex"
--}
+    [ ("experience", makeEducations templates (profileEducations pc)) ] 
+    "profile.tex"
+
+
 
 makeCV :: Content -> IO String 
 makeCV c = do 

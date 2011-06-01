@@ -54,10 +54,11 @@ headerParse =
          <*> oneFieldInput "tel"
 
 
-experienceParse1 :: ParsecT String () Identity ExperienceContent 
-experienceParse1 = 
-  Experience <$> oneFieldInput "period"
+educationParse1 :: ParsecT String () Identity EducationContent 
+educationParse1 = 
+  Education <$> oneFieldInput "period"
              <*> multiLineInput "content" "}"
 
-experienceParse :: ParsecT String () Identity ExperienceContent 
-experienceParse = oneGroupFieldInput "education" experienceParse1 
+educationParse :: ParsecT String () Identity EducationContent 
+educationParse = oneGroupFieldInput "education" educationParse1 
+

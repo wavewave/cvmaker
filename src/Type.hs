@@ -16,7 +16,11 @@ data HeaderContent = Header {
 } deriving Show
 
 
-data ExperienceContent = Experience { 
-  experiencePeriod  :: String, 
-  experienceContent :: String
+data EducationContent = Education { 
+  educationPeriod  :: String, 
+  educationContent :: String
 } deriving Show
+
+data Profile = Profile {
+  profileEducations :: [EducationContent]
+}
