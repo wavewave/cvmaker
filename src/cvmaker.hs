@@ -60,7 +60,7 @@ main = do
                       , publications = ""
                       , proceedings = ""
                       }
-      makeCV c >>= putStrLn 
+      makeCV c >>= writeFile (workdir </> "cv.tex") 
       
       
 
