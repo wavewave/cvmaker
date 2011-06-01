@@ -9,6 +9,7 @@ import Text.StringTemplate.Helpers
 import System.FilePath
 import System.IO
 import System.Directory
+import System.Environment
 
 import Text.Parsec
 
@@ -19,14 +20,10 @@ import Parse
 import ContentBuild
 import Config
 
-{-
-contdir = "/Users/wavewave/mac/prog/cvmaker/content"
-workdir = "/Users/wavewave/mac/prog/cvmaker/working"
--}
-
 getContentDirectory :: IO FilePath
 getContentDirectory = do
-  str <- readFile "~/.cvconfig"  
+  homedir <- getEnv "HOME" 
+  str <- readFile (homedir </> ".cvconfig")
   let r = parse parseConfig "" str 
   case r of
     Right (PathConfig contdir _) -> return contdir 
@@ -35,7 +32,8 @@ getContentDirectory = do
 
 getWorkDirectory :: IO FilePath
 getWorkDirectory = do
-  str <- readFile "~/.cvconfig"  
+  homedir <- getEnv "HOME"
+  str <- readFile (homedir </> ".cvconfig")
   let r = parse parseConfig "" str 
   case r of
     Right (PathConfig _ workdir) -> return workdir 
