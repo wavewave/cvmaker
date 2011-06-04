@@ -29,8 +29,6 @@ multiLineInput fieldname delimiters = do
   char ':' 
   spaces 
   str <- many1 (noneOf delimiters) 
---  oneOf delimiters 
---  try (oneOf delimiters)
   return str 
    
 
@@ -46,8 +44,6 @@ oneGroupFieldInput groupname parser = do
   r <- parser
   spaces 
   char '}'
---  spaces
---  char '\n'
   return r
 
 headerParse :: ParsecT String () Identity HeaderContent
@@ -56,7 +52,6 @@ headerParse =
   	 <*> oneFieldInput "field" 
          <*> oneFieldInput "email"
          <*> oneFieldInput "tel"
-
 
 profileParse :: ParsecT String () Identity Profile
 profileParse = 
@@ -72,39 +67,28 @@ activityParse :: ParsecT String () Identity Activity
 activityParse = 
   Activity <$> many1 (try workshopParse)
 
-educationParse1 :: ParsecT String () Identity EducationContent 
-educationParse1 = 
-  Education <$> oneFieldInput "period"
-            <*> multiLineInput "content" "}"
-
 educationParse :: ParsecT String () Identity EducationContent 
-educationParse = oneGroupFieldInput "education" educationParse1 
+educationParse = oneGroupFieldInput "education" $   
+                   Education <$> oneFieldInput "period"
+                             <*> multiLineInput "content" "}"
 
-
-experienceParse1 :: ParsecT String () Identity ExperienceContent 
-experienceParse1 = 
-  Experience <$> oneFieldInput "period"
-             <*> multiLineInput "title" "}"
 
 experienceParse :: ParsecT String () Identity ExperienceContent 
-experienceParse = oneGroupFieldInput "experience" experienceParse1 
-
-awardParse1 :: ParsecT String () Identity AwardContent 
-awardParse1 = 
-  Award <$> oneFieldInput "date"
-        <*> multiLineInput "title" "}"
+experienceParse = oneGroupFieldInput "experience" $
+                    Experience <$> oneFieldInput "period"
+                               <*> multiLineInput "title" "}"
 
 awardParse :: ParsecT String () Identity AwardContent 
-awardParse = oneGroupFieldInput "award" awardParse1 
-
-workshopParse1 :: ParsecT String () Identity Workshop
-workshopParse1 = 
-  Workshop <$> oneFieldInput "date"
-           <*> oneFieldInput "meeting"
-           <*> (try (oneFieldInput "event" >>= return . Just) 
-                <|> return Nothing) 
-           <*> (try (oneFieldInput "seminar" >>= return . Just)
-                <|> return Nothing) 
+awardParse = oneGroupFieldInput "award" $
+               Award <$> oneFieldInput "date"
+                     <*> multiLineInput "title" "}"
 
 workshopParse :: ParsecT String () Identity Workshop 
-workshopParse = oneGroupFieldInput "workshop" workshopParse1 
+workshopParse = oneGroupFieldInput "workshop" $
+                  Workshop <$> oneFieldInput "date"
+                           <*> oneFieldInput "meeting"
+                           <*> (try (oneFieldInput "event" >>= return . Just) 
+                                <|> return Nothing) 
+                           <*> (try (oneFieldInput "seminar" >>= return . Just)
+                                <|> return Nothing) 
+
