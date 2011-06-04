@@ -71,31 +71,21 @@ main = do
   templates <- directoryGroup templdir 
   contentstr <- readFile (contdir </> "content.txt") 
   putStrLn "reading content.txt"
-  let -- r = parse headerParse "" contentstr 
-     r = parse mainparse "" contentstr
+  let r = parse mainparse "" contentstr
   case r of 
-    Right (h,p) -> do 
+    Right (h,p,a) -> do 
       let c = Content { header = makeHeader templates h
                       , personalProfile = makePersonalProfile templates p 
-                      , professionalActivity = "" 
+                      , professionalActivity = makeActivity templates a  
                       , publications = ""
                       , proceedings = ""
                       }
       makeCV c >>= writeFile (workdir </> "cv.tex") 
       
-      
-
-
---      putStrLn $ makeHeader templates h 
----                 ++ makePersonalProfile templates p 
-
---(show h) -- (makeHeader templates h) 
     Left  err -> putStrLn (show err)
-
---  str <- makeCV testcontent 
---  putStrLn str
 
 mainparse = do 
   h <- headerParse
   p <- profileParse
-  return (h,p)
+  a <- activityParse
+  return (h,p,a)

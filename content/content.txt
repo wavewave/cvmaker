@@ -25,3 +25,76 @@ education {
   period: Mar 1995 -- Feb 1999
   content: B.S. in Physics, KAIST
 }
+
+experience {
+  period: Since Sep 2010
+  title: Postdoctoral Research Associate, University of Michigan
+}
+
+experience { 
+  period: Sep 2007 -- Aug 2010
+  title: Postdoctoral Research Associate, University of Wisconsin--Madison
+}
+
+experience { 
+  period: Mar 2006 -- Aug 2007
+  title: Postdoctoral Research Associate, Seoul National University
+}
+
+experience { 
+  period: Mar 2004 -- May 2005
+  title: Visiting Scholar, Lawrence Berkeley National Laboratory
+}
+
+experience { 
+  period: Mar 2000 -- Feb 2001
+  title: Teaching Assistant, KAIST
+}
+
+award { 
+  date: Mar 2010
+  title: 2010 Outstanding Young Research Award (OYRA) \\
+         by Association of Korean Physicists in America (AKPA)
+}
+
+award { 
+  date: Oct 1998
+  title: 2nd Prize in Korea Mathematics Olympiad for University Students
+}
+
+award {
+  date: Jul 1994
+  title: 2nd Prize in Korea Chemistry Olympiad for High School Students 
+}
+
+award { 
+  date: Jul 1992
+  title: 1st Prize in Korea Chemistry Olympiad for Junior High School Students
+}
+
+workshop {
+  date: May 20, 2011
+  meeting: TEV 2011, Seoul National University, Seoul, Korea.
+  event: Invited seminar presented: 
+  seminar: Mass Measurements Using Singularity.
+}
+
+workshop {
+  date: May 9 -- May 11, 2011
+  meeting: PHENO 2011, University of Wisconsin, Madison, USA.
+  event: Talk presented: 
+  seminar: Mass Measurements Using Singularity.
+}
+
+workshop { 
+  date: Aug 23 -- Aug 28, 2010
+  meeting: SUSY 2010, Bonn University, Bonn, Germany.
+}
+
+workshop {
+  date: Jul 5 -- Jul 9, 2010
+  meeting: Santa Fe 2010 Summer Workshop, Santa Fe, USA.
+  event: Talk presented:
+  seminar: Algebraic Singularity Method for Mass Measurements with Missing Energy.
+}
+

@@ -10,6 +10,9 @@ $Header$
 
 $PersonalProfile$
 
+\\pagebreak
+
+
 $ProfessionalActivity$
 
 $Publications$ 

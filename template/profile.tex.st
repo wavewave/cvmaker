@@ -17,3 +17,11 @@ $education$
 \\end{resumeblock}
 
 \\vskip 0.5cm
+
+\\begin{resumeblock}{Professional Experiences}
+$experiences$ \\end{resumeblock}
+
+\\vskip 0.5cm
+
+\\begin{resumeblock}{Awards}
+$awards$ \\end{resumeblock}

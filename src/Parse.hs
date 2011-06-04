@@ -1,6 +1,9 @@
 module Parse where
 
-import Control.Applicative
+-- import Control.Applicative 
+import Control.Applicative hiding ((<|>))
+
+import Control.Monad
 import Control.Monad.Identity
 
 import Text.Parsec
@@ -62,12 +65,46 @@ profileParse =
            <*> oneFieldInput "citizenship"
            <*> (multiLineInput "address" "|" <* oneOf "|")
            <*> many1 (try educationParse)
+           <*> many1 (try experienceParse)
+           <*> many1 (try awardParse)
+
+activityParse :: ParsecT String () Identity Activity 
+activityParse = 
+  Activity <$> many1 (try workshopParse)
 
 educationParse1 :: ParsecT String () Identity EducationContent 
 educationParse1 = 
   Education <$> oneFieldInput "period"
-             <*> multiLineInput "content" "}"
+            <*> multiLineInput "content" "}"
 
 educationParse :: ParsecT String () Identity EducationContent 
 educationParse = oneGroupFieldInput "education" educationParse1 
 
+
+experienceParse1 :: ParsecT String () Identity ExperienceContent 
+experienceParse1 = 
+  Experience <$> oneFieldInput "period"
+             <*> multiLineInput "title" "}"
+
+experienceParse :: ParsecT String () Identity ExperienceContent 
+experienceParse = oneGroupFieldInput "experience" experienceParse1 
+
+awardParse1 :: ParsecT String () Identity AwardContent 
+awardParse1 = 
+  Award <$> oneFieldInput "date"
+        <*> multiLineInput "title" "}"
+
+awardParse :: ParsecT String () Identity AwardContent 
+awardParse = oneGroupFieldInput "award" awardParse1 
+
+workshopParse1 :: ParsecT String () Identity Workshop
+workshopParse1 = 
+  Workshop <$> oneFieldInput "date"
+           <*> oneFieldInput "meeting"
+           <*> (try (oneFieldInput "event" >>= return . Just) 
+                <|> return Nothing) 
+           <*> (try (oneFieldInput "seminar" >>= return . Just)
+                <|> return Nothing) 
+
+workshopParse :: ParsecT String () Identity Workshop 
+workshopParse = oneGroupFieldInput "workshop" workshopParse1 

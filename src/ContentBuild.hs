@@ -30,6 +30,30 @@ makeEducation templates ec =
 makeEducations :: STGroup String -> [EducationContent] -> String
 makeEducations templates = concatMap (makeEducation templates)
 
+makeExperience :: STGroup String -> ExperienceContent -> String
+makeExperience templates ec = 
+  renderTemplateGroup
+    templates
+    [ ("period" , experiencePeriod  ec) 
+    , ("title"  , experienceTitle   ec) ] 
+    "experience.tex"
+
+makeExperiences :: STGroup String -> [ExperienceContent] -> String
+makeExperiences templates = concatMap (makeExperience templates)
+
+
+makeAward :: STGroup String -> AwardContent -> String
+makeAward templates ec = 
+  renderTemplateGroup
+    templates
+    [ ("period" , awardPeriod  ec) 
+    , ("title"  , awardTitle   ec) ] 
+    "award.tex"
+
+makeAwards :: STGroup String -> [AwardContent] -> String
+makeAwards templates = concatMap (makeAward templates)
+
+
 makePersonalProfile :: STGroup String -> Profile -> String 
 makePersonalProfile templates p = 
   renderTemplateGroup 
@@ -38,8 +62,35 @@ makePersonalProfile templates p =
     , ("birthplace" , profileBirthPlace p )
     , ("citizenship", profileCitizenship p ) 
     , ("address"    , profileAddress p )  
-    , ("education"  , makeEducations templates (profileEducations p)) ] 
+    , ("education"  , makeEducations templates (profileEducations p)) 
+    , ("experiences", makeExperiences templates (profileExperiences p)) 
+    , ("awards"     , makeAwards templates (profileAwards p)) ]
     "profile.tex"
+
+makeWorkshops :: STGroup String -> [Workshop] -> String
+makeWorkshops templates = concatMap (makeWorkshop templates)
+
+makeWorkshop :: STGroup String -> Workshop -> String 
+makeWorkshop templates w = 
+  renderTemplateGroup 
+    templates 
+    [ ("date", workshopDate w ) 
+    , ("meeting", workshopMeeting w) 
+    , ("event", case (workshopEvent w) of 
+                  Nothing -> "" 
+                  Just ev -> ev )
+    , ("seminar", case (workshopSeminar w) of 
+                    Nothing -> "" 
+                    Just sem -> "``" ++ sem ++ "''" ) ] 
+    "workshop.tex"
+
+
+makeActivity :: STGroup String -> Activity -> String 
+makeActivity templates p = 
+  renderTemplateGroup 
+    templates 
+    [ ("workshops", makeWorkshops templates (activityWorkshops p)) ]
+    "activity.tex"
 
 
 
