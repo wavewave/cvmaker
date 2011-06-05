@@ -69,7 +69,7 @@ main = do
   copyFiles
   templdir <- return . (</> "template" ) =<< getDataDir 
   templates <- directoryGroup templdir 
-  contentstr <- readFile (contdir </> "content.txt") 
+  contentstr <- readFile (contdir </> "cvpl.txt") 
   putStrLn "reading content.txt"
   let r = parse mainparse "" contentstr
   case r of 
