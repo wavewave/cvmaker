@@ -65,7 +65,7 @@ data Seminar = Seminar {
 } deriving Show
 
 data Publication = Publication { 
-  activityPapers :: [Either PageBreak Paper]
+  publicationPapers :: [Either PageBreak Paper]
 } deriving Show
 
 

@@ -15,6 +15,8 @@ $PersonalProfile$
 
 $ProfessionalActivity$
 
+\\pagebreak
+
 $Publications$ 
 
 $Proceedings$

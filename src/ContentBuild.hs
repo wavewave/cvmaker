@@ -122,6 +122,34 @@ makeSeminar templates e = do
                    , ("title", "``" ++ seminarTitle s ++ "''" ) ] 
                    "seminar.tex"
 
+makePaper :: STGroup String -> Either PageBreak Paper
+            -> State (BlockState,Int) String 
+makePaper templates e = do 
+  (st,num) <- get
+  case e of 
+    Left PageBreak -> do 
+      case st of 
+        _ -> do
+          put (NextBlock,num) 
+          return "\n\\end{tabular}\n\\end{resumeblock}\n\\pagebreak\n\n\\begin{resumeblock}{}\n\\begin{tabular}{rl}"
+    Right p -> do 
+      put (st,num+1)   
+      let journalpreprint = case (paperJournal p, paperArxiv p) of 
+            (Nothing,Nothing) -> "" 
+            (Nothing,Just arx) -> ", " ++arx
+            (Just j, Nothing) -> ", " ++ j 
+            (Just j, Just arx) -> ", " ++ j ++ ", " ++ arx
+
+      return $ 
+        renderTemplateGroup 
+          templates 
+          [ ("num", show num ) 
+          , ("authors", paperAuthors p) 
+          , ("title"  , paperTitle p)
+          , ("journalpreprint", journalpreprint)
+          , ("abstract", paperAbstract p ) ]
+          "paper.tex"
+
 
 makeActivity :: STGroup String -> Activity -> String 
 makeActivity templates p = 
@@ -135,6 +163,17 @@ makeActivity templates p =
        [ ("workshops", workshopstr )
        , ("seminars" , seminarstr  ) ]
        "activity.tex"
+
+makePublication :: STGroup String -> Publication -> String
+makePublication templates p = 
+  let concatMapM f lst = liftM concat (mapM f lst) 
+      papermonad = concatMapM (makePaper templates) (publicationPapers p)  
+      paperstr = evalState papermonad (FirstBlock,1)
+  in renderTemplateGroup 
+       templates 
+       [ ("papers", paperstr ) ]
+       "publication.tex"
+  
 
 makeCV :: Content -> IO String 
 makeCV c = do 

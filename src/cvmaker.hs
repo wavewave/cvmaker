@@ -73,11 +73,11 @@ main = do
   putStrLn "reading content.txt"
   let r = parse mainparse "" contentstr
   case r of 
-    Right (h,p,a) -> do 
+    Right (h,p,a,pu) -> do 
       let c = Content { header = makeHeader templates h
                       , personalProfile = makePersonalProfile templates p 
                       , professionalActivity = makeActivity templates a  
-                      , publications = ""
+                      , publications = makePublication templates pu
                       , proceedings = ""
                       }
       makeCV c >>= writeFile (workdir </> "cv.tex") 
@@ -88,4 +88,5 @@ mainparse = do
   h <- headerParse
   p <- profileParse
   a <- activityParse
-  return (h,p,a)
+  pu <- publicationParse
+  return (h,p,a,pu)

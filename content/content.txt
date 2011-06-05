@@ -497,7 +497,7 @@ seminar {
 }
 
 paper {
-  authors: M.~I.~Gresham, I.~W.~Kim and K.~M.~Zurek
+  authors: M.~I.~Gresham, I.-W.~Kim and K.~M.~Zurek
   title: On Models of New Physics for the Tevatron Top $A_{FB}$
   journal: accepted for publication in Physics Review D
   arxiv: arXiv:1103.3501 [hep-ph]
@@ -507,5 +507,237 @@ $\scriptstyle {Z'_H}$ and $\scriptstyle {W'}$ models have considerably
 lower selection efficiencies in high invariant mass bins as comparedto 
 the Standard Model.   We find that the models that successfully
 generate the corrected CDF asymmetry at the parton level reproduce
-very well the more finely binned uncorrected asymmetry.
+very well the more finely binned uncorrected asymmetry. |
 }
+
+paper { 
+  authors: M.~I.~Gresham, I.-W.~Kim and K.~M.~Zurek,
+  title: Searching for Top Flavor Violating Resonances
+  journal: accepted for publication in Physics Review D
+  arxiv: arXiv:1102.0018 [hep-ph]
+  abstract: We study new top flavor violating resonances that are singly produced in association with a top at the LHC. Such top flavor violating states could be responsible for the Tevatron top forward-backward asymmetry. |
+}
+
+paper { 
+  authors: B.~Altunkaynak, L.~L.~Everett, I.~W.~Kim, B.~.D.~Nelson and Y.~Rao
+  title: Landscape of Supersymmetric Particle Mass Hierarchies in Minimal Supergravity and Deflected Mirage Mediation Models
+  arxiv: arXiv:1011.1439 [hep-ph]
+  abstract: We compare the landscape of supersymmetric particle mass hierarchies for the lightest four new states in the MSSM in two models of the soft supersymmetry breaking parameters: mSUGRA and Deflected Mirage Mediation. |
+}
+
+paper { 
+  authors: H.~C.~Cheng, Z.~Han, I.-W.~Kim and  L.~T.~Wang
+  title: Missing Momentum Reconstruction and Spin Measurements at Hadron Colliders
+  journal: JHEP~\textbf{\small 1011},~122~(2010) 
+  abstract: 
+We study methods for reconstructing the momenta of invisible particles in cascade decay chains at hadron colliders. We develop techniques of determining spins of particles in theories beyond the standard model. Unlike other previously proposed methods, this method can be used to determine the spin of the initial particle in the decay chain. |
+} 
+
+paper { 
+  authors: B.~Altunkaynak, L.~L.~Everett, I.~W.~Kim, B.~.D.~Nelson and Y.~Rao
+  title: Phenomenological Implications of Deflected Mirage Mediation: Comparison with Mirage Mediation
+  journal: JHEP~\textbf{\small 1005},~054~(2010)
+  abstract: 
+We compare the collider phenomenology of mirage mediation and deflected mirage mediation, which are two recently proposed "mixed" supersymmetry breaking scenarios motivated from string compactifications. The scenarios differ in that deflected mirage mediation includes gauge mediation contribution in addition to the contributions from gravity mediation and anomaly mediation in mirage mediation. |
+}
+
+pagebreak 
+
+paper { 
+  authors: K.~Choi, I.-W.~Kim and C.~Shin 
+  title: Warped Gauge Threshold Corrections
+  journal: invited review to Focus Issues in New Journal of Physics, New~J.~Phys.~\textbf{\small 12},~075014~(2010)
+  abstract: 
+In this review, the one-loop Kaluza-Klein threshold corrections 
+to gauge coupling unification in warped extra dimension is reviewed 
+and new more general expressions of one-loop gauge thresholds 
+are presented for generic 5D gauge theory with arbitrary matter 
+fields on a slice of AdS5. |
+} 
+
+paper { 
+  authors: W.~S.~Cho, J.-H.~Huh, I.~W.~Kim, J.~E.~Kim and B.~Kyae
+  title: Constraining WIMP magnetic moment from CDMS II experiment
+  journal: Phys.~Lett.~B~\textbf{\small 687},~6~(2010)
+  abstract: 
+We consider a degenerate or a nearly degenerate dark matter sector where a sizable magnetic moment of an almost Dirac type neutral dark matter candidate is anticipated. Then, due to soft photon exchange, the cross-section in direct detection can be enhanced at low momentum transfer region. We discuss the implication of this type of models in view of the recent CDMS II report. |
+} 
+
+paper {
+  authors: I.-W.~Kim 
+  title: Algebraic Singularity Method for Mass Measurement with Missing Energy
+  journal: Phys.~Rev.~Lett.~\textbf{\small 104},~081601~(2010)
+  abstract:
+We propose a novel generalized method for mass measurements based on the singularity structure of the kinematic phase space that can be applied to any event topology with missing energy. We provide a systematic way to obtain optimized singularity coordinates for the process of interest.  Our method subsumes the well-known end-point and transverse mass methods and yields new and powerful techniques for studying ``missing particle'' events at the LHC.  |
+}
+
+paper {
+  authors: T.~Han, I.-W.~Kim and J.~Song 
+  title: Kinematic Cusps: Determining the Missing Particle Mass at the LHC
+  journal: Phys.~Lett.~B~\textbf{\small 693},~575~(2010) 
+  abstract:
+In the pair production of neutral stable particles via  
+a specific decay topology, we observe kinematic cusp 
+structures in the invariant mass and
+angular distributions.  The cusps can be used to determine 
+the missing particle mass and the intermediate particle mass. |
+}
+
+paper { 
+  authors: L.~L.~Everett, I.-W.~Kim, P.~Ouyang and K.~M.~Zurek 
+  title: Moduli Stabilization and Supersymmetry Breaking in Deflected Mirage Mediation
+  journal: JHEP  \textbf{\small 0808}, 102 (2008)
+  abstract:
+We analyzed the details of moduli stabilization and its implications for the 
+pattern of soft SUSY breaking terms within deflected mirage mediation. 
+The renormalization group evolution of the soft parameters and features of 
+the low energy spectra were also investigated. |
+}
+
+pagebreak
+
+paper {
+  authors: L.~L.~Everett, I.-W.~Kim, P.~Ouyang and K.~M.~Zurek
+  title: Deflected Mirage Mediation: A Framework for Generalized Supersymmetry Breaking
+  journal: Phys.\ Rev.\ Lett.\   \textbf{\small 101}, 101803 (2008) 
+  abstract: 
+We presented a general phenomenological framework for supersymmetry 
+breaking that is motivated by recent developments in moduli stabilization
+in string theory. The approach, which we called deflected mirage mediation, 
+predicts comparable contributions from gravity, gauge and 
+anomaly mediation, providing a rich setting in 
+which to explore generalized supersymmetry breaking at the LHC. |
+}
+
+paper { 
+  authors: K.~J.~Bae, R.~Dermisek, H.~D.~Kim and I.-W.~Kim
+  title: Mixed Bino-Wino-Higgsino Dark Matter in Gauge Messenger Models
+  journal: JCAP \textbf{\small 0708}, 014 (2007)
+  abstract:
+We studied thermal neutralino dark matter in 
+gauge messenger models. In this class of models, the LSP has 
+sizable wino and higgsino mixing, and thus can naturally satisfy dark 
+matter constraints. |
+}
+
+paper {
+  authors: I.-W.~Kim, J.~E.~Kim and B.~Kyae,
+  title: Harmless R-parity violation from {\small $Z_{12-I}$} compactification of {\small $E_8 \times E_8'$} heterotic string
+  journal: Phys.\ Lett.\  B  \textbf{\small 647}, 275 (2007)
+  abstract: 
+We analyzed an approximate R-parity symmetry that emerges in heterotic 
+string models based on $\scriptstyle {Z_{12-I}}$ orbifold compactifications. 
+The resulting 
+R parity violation in these models is not in conflict with the current observational bound on 
+proton decay. |
+}
+
+paper { 
+  authors: K.~S.~Choi, I.~W.~Kim and J.~E.~Kim
+  title: String compactification, QCD axion and axion photon photon coupling
+  journal: JHEP  \textbf{\small 0703}, 116 (2007) 
+  abstract: 
+We found that in a certain class of heterotic string models based on
+$\scriptstyle Z_{12-I}$ orbifold compactifications, an approximate Peccei-Quinn symmetry
+with a small PQ breaking scale can result. This allows for the interesting
+possibility of a realistic axion within this class of string models. |
+}
+
+paper { 
+  authors: R.~Dermisek, H.~D.~Kim and I.-W.~Kim
+  title: Mediation of supersymmetry breaking in gauge messenger models
+  journal: JHEP \textbf{\small 0610}, 001 (2006)
+  abstract: 
+We proposed a class of models called gauge messenger models 
+in which the messenger fields are GUT X,Y gauge multiplets at low energies.
+This scenario results in negative stop masses at high energies, 
+as well as large A terms and small gluino masses at low energies, which significantly reduces the Higgs sector fine-tuning in the MSSM. |
+}
+
+paper {
+  authors: I.-W.~Kim and J.~E.~Kim
+  title: Modification of decay constants of superstring axions: Effects of flux compactification and axion mixing 
+  journal: Phys.\ Lett.\  B  \textbf{\small 639}, 342 (2006)
+  abstract: 
+We showed that the recent discovery of the existence of heterotic flux 
+compactifications can have implications for reducing the scale of the axion 
+decay constant from the string scale to an intermediate scale, 
+due to warping. We also pointed out that axion mixing effects must be 
+considered when lowering the axion decay constant scale. |
+}
+
+pagebreak
+
+paper { 
+  authors: H.~Abe, K.~Choi and I.-W.~Kim
+  title: Fayet-Iliopoulos terms in 5D orbifold supergravity
+  journal: JHEP \textbf{\small 0409}, 001 (2004)
+  abstract:
+We constructed complete 5D off-shell supergravity theories with 
+Fayet-Iliopoulos terms within orbifold compactifications.  We used the 
+4-form multiplier mechanism and considered both flat and warped 
+geometries. The 
+formulation was applied to the issue of radion stabilization. |
+}
+
+paper {
+  authors: K.~Choi, I.~W.~Kim and W.~Y.~Song
+  title: Flavor hierarchy from extra dimension and gauge threshold correction
+  journal: Nucl.\ Phys.\  B \textbf{\small 687}, 101 (2004)
+  abstract:
+We showed that in orbifold GUT models where flavor mixing originates from the 
+quasi-localization of matter fields in the extra dimension, there are 
+sizable corrections to the low energy gauge couplings. 
+We calculated the threshold corrections at one loop order, and suggested
+flavor $\scriptstyle U(1)$ charge combinations which do not spoil the 
+MSSM gauge coupling unification. |
+}
+
+paper {
+  authors: K.~Choi, D.~Y.~Kim, I.-W.~Kim and T.~Kobayashi 
+  title: Supersymmetry breaking in warped geometry
+  journal: Eur.\ Phys.\ J.\  C \textbf{\small 35}, 267 (2004)
+  abstract:
+We presented a general analysis of SUSY breaking in models with a geometric
+separation between observable and hidden sectors, and showed that 
+flavor dependent SUSY breaking can be effectively suppressed even in the 
+quasi-localized case. We applied our formulation to examine the 
+consequences of flavor violating trilinear terms in radion mediation. |
+}
+
+paper { 
+  authors: K.~Choi and I.-W.~Kim
+  title: One loop gauge couplings in AdS(5)
+  journal: Phys.\ Rev.\  D  \textbf{\small 67}, 045005 (2003)
+  abstract:
+We presented a general analysis of the one-loop gauge couplings in 
+non-supersymmetric warped extra dimensions, including scalar, fermion and
+vector contributions with arbitrary boundary conditions. Our work
+is now widely used as a standard result in GUT model building in 
+warped extra dimensions. |
+}
+
+paper {
+  authors: K.~Choi, H.~D.~Kim and I.-W.~Kim
+  title: Radius dependent gauge unification in AdS(5)
+  journal: JHEP \textbf{\small 0303}, 034 (2003)
+  abstract:
+We generalized our previous results on the one-loop gauge couplings in 
+supersymmetric warped extra dimensions by including bulk fields with 
+arbitrary spins and orbifold boundary conditions. |
+}
+
+paper { 
+  authors: K.~Choi, H.~D.~Kim and I.-W.~Kim
+  title: Gauge coupling renormalization in orbifold field theories
+  journal: JHEP \textbf{\small 0211}, 033 (2002)
+  abstract:
+We calculated the one-loop gauge couplings in both flat and warped extra 
+dimensions, using holomorphy of the gauge couplings in supersymmetric 
+theories. This paper provided the first comprehensive result of the 
+one-loop gauge couplings in warped geometries. |
+} 
+
+
+
+

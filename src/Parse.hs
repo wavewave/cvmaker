@@ -71,6 +71,10 @@ activityParse =
                       <|> (try (seminarParse >>= return.Right)))
 
 
+publicationParse :: ParsecT String () Identity Publication
+publicationParse = 
+  Publication <$> many1 ((try (pagebreakParse >>= return.Left))
+                         <|> (try (paperParse >>= return.Right)))
 
 
 educationParse :: ParsecT String () Identity EducationContent 
@@ -121,4 +125,4 @@ paperParse = oneGroupFieldInput "paper" $
                           <|> return Nothing)
                      <*> (try (oneFieldInput "arxiv" >>= return . Just)
                           <|> return Nothing)
-                     <*> multiLineInput "abstract" "}"
+                     <*> (multiLineInput "abstract" "|" <* oneOf "|")
