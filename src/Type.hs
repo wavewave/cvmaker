@@ -1,5 +1,8 @@
 module Type where
 
+data PageBreak = PageBreak
+  deriving Show
+
 data Content = Content { 
   header :: String, 
   personalProfile :: String,
@@ -42,13 +45,35 @@ data Profile = Profile {
 }
 
 data Activity = Activity { 
-  activityWorkshops :: [Workshop]
+  activityWorkshops :: [Either PageBreak Workshop],
+  activitySeminars  :: [Either PageBreak Seminar]
 } deriving Show
+
 
 data Workshop = Workshop { 
   workshopDate :: String, 
   workshopMeeting :: String, 
   workshopEvent :: Maybe String, 
   workshopSeminar :: Maybe String 
+} deriving Show
+
+data Seminar = Seminar { 
+  seminarDate  :: String, 
+  seminarPlace :: String, 
+  seminarEvent :: Maybe String, 
+  seminarTitle :: String
+} deriving Show
+
+data Publication = Publication { 
+  activityPapers :: [Either PageBreak Paper]
+} deriving Show
+
+
+data Paper = Paper { 
+  paperAuthors  :: String,
+  paperTitle    :: String, 
+  paperJournal  :: Maybe String, 
+  paperArxiv    :: Maybe String, 
+  paperAbstract :: String
 } deriving Show
 

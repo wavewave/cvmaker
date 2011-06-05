@@ -6,6 +6,8 @@ import Text.StringTemplate.Helpers
 import System.FilePath
 import Paths_cvmaker
 
+import Control.Monad.State
+
 import Type
 
 
@@ -67,32 +69,72 @@ makePersonalProfile templates p =
     , ("awards"     , makeAwards templates (profileAwards p)) ]
     "profile.tex"
 
-makeWorkshops :: STGroup String -> [Workshop] -> String
-makeWorkshops templates = concatMap (makeWorkshop templates)
+-- makeWorkshops :: STGroup String -> [Either PageBreak Workshop] -> String
+-- makeWorkshops templates = concatMap (makeWorkshop templates)
 
-makeWorkshop :: STGroup String -> Workshop -> String 
-makeWorkshop templates w = 
-  renderTemplateGroup 
-    templates 
-    [ ("date", workshopDate w ) 
-    , ("meeting", workshopMeeting w) 
-    , ("event", case (workshopEvent w) of 
-                  Nothing -> "" 
-                  Just ev -> ev )
-    , ("seminar", case (workshopSeminar w) of 
-                    Nothing -> "" 
-                    Just sem -> "``" ++ sem ++ "''" ) ] 
-    "workshop.tex"
+makeWorkshop :: STGroup String -> Either PageBreak Workshop 
+             -> State BlockState String 
+makeWorkshop templates e = do 
+  case e of 
+    Left PageBreak -> do 
+      st <- get 
+      case st of 
+        FirstBlock -> do
+          put NextBlock 
+          return "\n\\end{resumeblocktwo}\n\n\\pagebreak\n\n\\begin{resumeblock}{}\n\n"
+        _ -> do 
+          return "\n\\end{resumeblock}\n\n\\pagebreak\n\n\\begin{resumeblock}{}\n\n"
+    Right w -> return $ 
+                 renderTemplateGroup 
+                   templates 
+                   [ ("date", workshopDate w ) 
+                   , ("meeting", workshopMeeting w) 
+                   , ("event", case (workshopEvent w) of 
+                                 Nothing -> "" 
+                                 Just ev -> ev )
+                   , ("seminar", case (workshopSeminar w) of 
+                                 Nothing -> "" 
+                                 Just sem -> "``" ++ sem ++ "''" ) ] 
+                   "workshop.tex"
+
+data BlockState = FirstBlock | NextBlock
+
+makeSeminar :: STGroup String -> Either PageBreak Seminar 
+            -> State BlockState String 
+makeSeminar templates e = do 
+  case e of 
+    Left PageBreak -> do 
+      st <- get 
+      case st of 
+        FirstBlock -> do
+          put NextBlock 
+          return "\n\\end{resumeblocktwo}\n\n\\pagebreak\n\n\\begin{resumeblock}{}\n\n"
+        _ -> do 
+          return "\n\\end{resumeblock}\n\n\\pagebreak\n\n\\begin{resumeblock}{}\n\n"
+    Right s -> return $ 
+                 renderTemplateGroup 
+                   templates 
+                   [ ("date", seminarDate s) 
+                   , ("place", seminarPlace s) 
+                   , ("event", case (seminarEvent s) of 
+                                 Nothing -> "Seminar presented:" 
+                                 Just ev -> ev )
+                   , ("title", "``" ++ seminarTitle s ++ "''" ) ] 
+                   "seminar.tex"
 
 
 makeActivity :: STGroup String -> Activity -> String 
 makeActivity templates p = 
-  renderTemplateGroup 
-    templates 
-    [ ("workshops", makeWorkshops templates (activityWorkshops p)) ]
-    "activity.tex"
-
-
+  let concatMapM f lst = liftM concat (mapM f lst) 
+      seminarmonad = concatMapM (makeSeminar templates) (activitySeminars p)  
+      seminarstr = evalState seminarmonad FirstBlock
+      workshopmonad = concatMapM (makeWorkshop templates) (activityWorkshops p)
+      workshopstr = evalState workshopmonad FirstBlock
+  in renderTemplateGroup 
+       templates 
+       [ ("workshops", workshopstr )
+       , ("seminars" , seminarstr  ) ]
+       "activity.tex"
 
 makeCV :: Content -> IO String 
 makeCV c = do 

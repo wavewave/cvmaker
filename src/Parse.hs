@@ -65,7 +65,13 @@ profileParse =
 
 activityParse :: ParsecT String () Identity Activity 
 activityParse = 
-  Activity <$> many1 (try workshopParse)
+  Activity <$> many1 ((try (pagebreakParse >>= return.Left)) 
+                      <|> (try (workshopParse >>= return.Right)))
+           <*> many1 ((try (pagebreakParse >>= return.Left))
+                      <|> (try (seminarParse >>= return.Right)))
+
+
+
 
 educationParse :: ParsecT String () Identity EducationContent 
 educationParse = oneGroupFieldInput "education" $   
@@ -92,3 +98,27 @@ workshopParse = oneGroupFieldInput "workshop" $
                            <*> (try (oneFieldInput "seminar" >>= return . Just)
                                 <|> return Nothing) 
 
+
+seminarParse :: ParsecT String () Identity Seminar 
+seminarParse = oneGroupFieldInput "seminar" $
+                  Seminar <$> oneFieldInput "date"
+                          <*> oneFieldInput "place"
+                          <*> (try (oneFieldInput "event" >>= return . Just) 
+                               <|> return Nothing) 
+                          <*> oneFieldInput "title"
+
+pagebreakParse :: ParsecT String () Identity PageBreak
+pagebreakParse = do 
+  spaces       
+  string "pagebreak"
+  return PageBreak
+
+paperParse :: ParsecT String () Identity Paper
+paperParse = oneGroupFieldInput "paper" $ 
+               Paper <$> oneFieldInput "authors"
+                     <*> oneFieldInput "title"
+                     <*> (try (oneFieldInput "journal" >>= return . Just) 
+                          <|> return Nothing)
+                     <*> (try (oneFieldInput "arxiv" >>= return . Just)
+                          <|> return Nothing)
+                     <*> multiLineInput "abstract" "}"
