@@ -75,7 +75,8 @@ publicationParse :: ParsecT String () Identity Publication
 publicationParse = 
   Publication <$> many1 ((try (pagebreakParse >>= return.Left))
                          <|> (try (paperParse >>= return.Right)))
-
+              <*> many1 ((try (pagebreakParse >>= return.Left))
+                         <|> (try (proceedingParse >>= return.Right)))
 
 educationParse :: ParsecT String () Identity EducationContent 
 educationParse = oneGroupFieldInput "education" $   
@@ -126,3 +127,10 @@ paperParse = oneGroupFieldInput "paper" $
                      <*> (try (oneFieldInput "arxiv" >>= return . Just)
                           <|> return Nothing)
                      <*> (multiLineInput "abstract" "|" <* oneOf "|")
+
+proceedingParse :: ParsecT String () Identity Proceeding
+proceedingParse = oneGroupFieldInput "proceeding" $ 
+                    Proceeding <$> oneFieldInput "authors"
+                               <*> oneFieldInput "title"
+                               <*> oneFieldInput "conference"
+                               <*> oneFieldInput "journal"

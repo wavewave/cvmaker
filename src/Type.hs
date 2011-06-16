@@ -65,7 +65,8 @@ data Seminar = Seminar {
 } deriving Show
 
 data Publication = Publication { 
-  publicationPapers :: [Either PageBreak Paper]
+  publicationPapers :: [Either PageBreak Paper], 
+  publicationProceedings :: [Either PageBreak Proceeding]
 } deriving Show
 
 
@@ -75,5 +76,12 @@ data Paper = Paper {
   paperJournal  :: Maybe String, 
   paperArxiv    :: Maybe String, 
   paperAbstract :: String
+} deriving Show
+
+data Proceeding = Proceeding { 
+  proceedingAuthors  :: String,
+  proceedingTitle    :: String, 
+  proceedingConference :: String,
+  proceedingJournal  :: String
 } deriving Show
 

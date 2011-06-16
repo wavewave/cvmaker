@@ -69,9 +69,6 @@ makePersonalProfile templates p =
     , ("awards"     , makeAwards templates (profileAwards p)) ]
     "profile.tex"
 
--- makeWorkshops :: STGroup String -> [Either PageBreak Workshop] -> String
--- makeWorkshops templates = concatMap (makeWorkshop templates)
-
 makeWorkshop :: STGroup String -> Either PageBreak Workshop 
              -> State BlockState String 
 makeWorkshop templates e = do 
@@ -151,6 +148,29 @@ makePaper templates e = do
           "paper.tex"
 
 
+makeProceeding :: STGroup String -> Either PageBreak Proceeding
+               -> State (BlockState,Int) String 
+makeProceeding templates e = do 
+  (st,num) <- get
+  case e of 
+    Left PageBreak -> do 
+      case st of 
+        _ -> do
+          put (NextBlock,num) 
+          return "\n\\end{tabular}\n\\end{resumeblock}\n\\pagebreak\n\n\\begin{resumeblock}{}\n\\begin{tabular}{rl}"
+    Right p -> do 
+      put (st,num+1)   
+      return $ 
+        renderTemplateGroup 
+          templates 
+          [ ("num", show num ) 
+          , ("authors"   , proceedingAuthors p) 
+          , ("title"     , proceedingTitle p)
+          , ("conference", proceedingConference p)
+          , ("journal"   , proceedingJournal p ) ]
+          "proceeding.tex"
+
+
 makeActivity :: STGroup String -> Activity -> String 
 makeActivity templates p = 
   let concatMapM f lst = liftM concat (mapM f lst) 
@@ -169,9 +189,14 @@ makePublication templates p =
   let concatMapM f lst = liftM concat (mapM f lst) 
       papermonad = concatMapM (makePaper templates) (publicationPapers p)  
       paperstr = evalState papermonad (FirstBlock,1)
+      proceedingmonad = concatMapM (makeProceeding templates) 
+                                   (publicationProceedings p)  
+      proceedingstr = evalState proceedingmonad (FirstBlock,1)
+
   in renderTemplateGroup 
        templates 
-       [ ("papers", paperstr ) ]
+       [ ("papers", paperstr )
+       , ("proceedings", proceedingstr ) ]
        "publication.tex"
   
 
