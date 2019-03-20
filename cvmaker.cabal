@@ -23,8 +23,11 @@ Executable cvmaker
                  directory, 
                  filepath>1, 
                  HStringTemplate,
-                 devadmin, 
-                 parsec
+                 parsec,
+                 safe,
+                 strict,
+                 containers,
+                 FileManip
 
 Library
   hs-source-dirs: src 
